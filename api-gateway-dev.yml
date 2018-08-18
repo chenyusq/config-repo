@@ -3,6 +3,21 @@ spring:
     name: api-gateway
 server:
   port: 8071
+zuul:
+  routes:
+    clients:
+      #修改后的地址
+      path: /client/**
+      #服务名
+      serviceId: config-client
+      #zuul默认不传递敏感头("Cookie", "Set-Cookie", "Authorization")，通过配置sensitiveHeaders为空可以传递
+      sensitiveHeaders:
+    #简洁写法
+    #config-client: /client/**
+  #排除外部访问路由地址
+  ignored-patterns:
+    - /config-client/index
+    #- /*/index
 
 env:
   dev
